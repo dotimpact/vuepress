@@ -66,6 +66,15 @@ export default ({ Vue }) => {
         })
         return pagination
       }
+    },
+    methods: {
+      _createPagination(pages, options={}) {
+        const meta = Object.assign({}, paginationMeta, options)
+        return new Pagination(meta, {
+          pages, route: this.$route
+        });
+
+      }
     }
   })
 }

@@ -1,4 +1,5 @@
 import paginationMeta from '@dynamic/pagination'
+import tagPaginationMeta from '@dynamic/tag-pagination'
 
 class Pagination {
   constructor (pagination, { pages, route }) {
@@ -57,24 +58,28 @@ class Pagination {
 }
 
 export default ({ Vue }) => {
-  Vue.mixin({
-    computed: {
-      $pagination () {
-        const { pages } = this.$site
-        const pagination = new Pagination(paginationMeta, {
-          pages, route: this.$route
-        })
-        return pagination
-      }
-    },
-    methods: {
-      _createPagination(pages, options={}) {
-        const meta = Object.assign({}, paginationMeta, options)
-        return new Pagination(meta, {
-          pages, route: this.$route
-        });
-
-      }
+  const computed = {
+    $pagination () {
+      const { pages } = this.$site
+      const pagination = new Pagination(paginationMeta, {
+        pages, route: this.$route
+      })
+      return pagination
     }
+  }
+
+  if(this.$tag) {
+    computed.$pagination = function() {
+      const { pages } = this.$tag
+      const pagination = new Pagination(tagPaginationMeta, {
+        pages, route: this.$route
+      })
+      return pagination
+    }
+
+  }
+
+  Vue.mixin({
+    computed,
   })
 }

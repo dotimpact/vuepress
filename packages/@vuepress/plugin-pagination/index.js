@@ -86,8 +86,7 @@ module.exports = (options, ctx) => ({
   },
 
   async clientDynamicModules() {
-    const =
-    modules = [
+    const modules = [
       {
         name: 'pagination.js',
         content: `export default ${JSON.stringify(ctx.pagination, null, 2)}`
@@ -105,7 +104,7 @@ module.exports = (options, ctx) => ({
         content: `export default const null`
       })
     }
-  }
 
     return modules;
-  })
+  }
+})

@@ -14,8 +14,7 @@ function getPagination(posts, options, postsFilter, postsSorter) {
   const {
     perPagePosts = 10,
     paginationDir = 'page',
-    firstPagePath = '/',
-    layout = 'Layout'
+    firstPagePath = '/'
   } = options
 
   const intervallers = getIntervallers(posts.length, perPagePosts)
@@ -48,6 +47,9 @@ module.exports = (options, ctx) => ({
 
     const {pages} = ctx
     const posts = pages.filter(postsFilter)
+    const {
+      layout = 'Layout'
+    } = options
     const pagination = getPagination(posts, options, postsFilter, postsSorter)
 
     ctx.pagination = pagination
